@@ -73,5 +73,5 @@ module ParseInt {
 
     export
         provides Integer
-        provides toInt, toStr, isNumString
+        provides toInt, toStr, isNumString, charInNC, numchars
 }
