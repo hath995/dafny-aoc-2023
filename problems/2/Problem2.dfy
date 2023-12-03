@@ -77,7 +77,7 @@ module Problem2 {
 
     method problem2_2(input: string) returns (x: int) {
         var data := parseInput(input);
-        var sets := Map((game: Game) => assume {:axiom} |game.cubeSets| > 0; FoldLeft((x,y) => msmax(x, y), game.cubeSets[0], game.cubeSets),data);
+        // var sets := Map((game: Game) => assume {:axiom} |game.cubeSets| > 0; FoldLeft((x,y) => msmax(x, y), game.cubeSets[0], game.cubeSets),data);
         // print sets;
         var powers := Map((game: Game) => assume {:axiom} |game.cubeSets| > 0; mspower(FoldLeft((x,y) => msmax(x , y), game.cubeSets[0], game.cubeSets)),data);
         // print powers;
