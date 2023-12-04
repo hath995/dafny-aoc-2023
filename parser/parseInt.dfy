@@ -71,7 +71,11 @@ module ParseInt {
         s == "" || forall i  :: 0 <= i < |s| ==> charInNC(s[i])
     }
 
+    function stripWhitespace(s: string): string {
+        if |s| > 0 then if charInNC(s[0]) then [s[0]]+stripWhitespace(s[1..]) else stripWhitespace(s[1..]) else ""
+    }
+
     export
         provides Integer
-        provides toInt, toStr, isNumString, charInNC, numchars
+        provides toInt, toStr, isNumString, charInNC, numchars, stripWhitespace
 }
