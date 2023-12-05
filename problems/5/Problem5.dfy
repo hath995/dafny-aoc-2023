@@ -18,12 +18,13 @@ module Problem5 {
         requires forall x:: x in range ==> |x| == 3 
         // ensures forall x:nat :: rangeMapper(range).requires(x)
     {
-        (x: nat) => if |range| == 0 then 
-            x 
+        var m: nat -> nat := (x: nat) => if |range| == 0 then 
+            x
         else if range[0][1] <= x < range[0][1]+range[0][2] then 
             range[0][0]+(x-range[0][1])
         else 
-            rangeMapper(range[1..])(x)
+            rangeMapper(range[1..])(x);
+        m
     }
     // function rangeMapper(range: seq<seq<nat>>): nat -> nat {
     //     (z: nat) => z
@@ -328,8 +329,8 @@ module Problem5 {
         var nextRanges := seeds;
         for i:=0 to |functs| {
             var mappedNext: seq<Range> := [];
-            print "NEXTREANGES: ", nextRanges,"\n";
-            print functs[i], "\n";
+            // print "NEXTREANGES: ", nextRanges,"\n";
+            // print functs[i], "\n";
             while |nextRanges| > 0 
                 decreases *
             {
@@ -354,7 +355,8 @@ module Problem5 {
         }
         print nextRanges;
         assume {:axiom} |nextRanges| > 0;
-        var lowest := FoldLeft((r: Range, l: Range) => if r.0 < l.0 then r else l , nextRanges[0], nextRanges);
+        var sortRanges: (Range, Range) -> Range :=(r: Range, l: Range) => (if r.0 < l.0 then r else l);
+        var lowest: Range := FoldLeft(sortRanges, nextRanges[0], nextRanges);
         print "\n";
         print lowest;
         print "\n";
