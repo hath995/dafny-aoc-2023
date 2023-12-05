@@ -104,6 +104,7 @@ module Problem3 {
         }
         var nextTo := Filter((gear: Gear) => NextToSymbol(gear, symbols), gears);
         var notnextTo := Filter((gear: Gear) => !NextToSymbol(gear, symbols), gears);
+        //https://www.shellhacks.com/bash-colors/
         var RL_START_IGNORE := 1 as char;
         var RL_END_IGNORE := 2 as char;
         var escape: char := 27 as char;
