@@ -18,13 +18,12 @@ module Problem5 {
         requires forall x:: x in range ==> |x| == 3 
         ensures forall x:nat :: rangeMapper(range).requires(x)
     {
-        var m: nat -> nat := (x: nat) requires |range| >0 ==> rangeMapper(range[1..]).requires(x) reads (set y | |range| > 0 && y in rangeMapper(range[1..]).reads(x) :: y ) => if |range| == 0 then 
+        (x: nat) => (if |range| == 0 then 
             x
         else if range[0][1] <= x < range[0][1]+range[0][2] then 
             range[0][0]+(x-range[0][1])
         else 
-            rangeMapper(range[1..])(x);
-        m
+            rangeMapper(range[1..])(x)) as nat
     }
     // function rangeMapper(range: seq<seq<nat>>): nat -> nat {
     //     (z: nat) => z
